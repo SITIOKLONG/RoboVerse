@@ -1,0 +1,141 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        // For standalone script execution
+        {
+            "name": "Python: Current File",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+        },
+        {
+            "name": "Python: Train Template-Roboverse-Direct-v0 with rsl_rl (PPO)",
+            "type": "debugpy",
+            "request": "launch",
+            "args" : ["--task", "Template-Roboverse-Direct-v0", "--num_envs", "4096", "--headless"],
+            "program": "${workspaceFolder}/scripts/rsl_rl/train.py",
+            "console": "integratedTerminal",
+        },
+        {
+            "name": "Python: Play Template-Roboverse-Direct-v0 with rsl_rl (PPO)",
+            "type": "debugpy",
+            "request": "launch",
+            "args" : ["--task", "Template-Roboverse-Direct-v0", "--num_envs", "32"],
+            "program": "${workspaceFolder}/scripts/rsl_rl/play.py",
+            "console": "integratedTerminal",
+        },
+        {
+            "name": "Python: Train Template-Roboverse-Marl-Direct-v0 with rsl_rl (PPO)",
+            "type": "debugpy",
+            "request": "launch",
+            "args" : ["--task", "Template-Roboverse-Marl-Direct-v0", "--num_envs", "4096", "--headless"],
+            "program": "${workspaceFolder}/scripts/rsl_rl/train.py",
+            "console": "integratedTerminal",
+        },
+        {
+            "name": "Python: Play Template-Roboverse-Marl-Direct-v0 with rsl_rl (PPO)",
+            "type": "debugpy",
+            "request": "launch",
+            "args" : ["--task", "Template-Roboverse-Marl-Direct-v0", "--num_envs", "32"],
+            "program": "${workspaceFolder}/scripts/rsl_rl/play.py",
+            "console": "integratedTerminal",
+        },
+        {
+            "name": "Python: Train Template-Roboverse-v0 with rsl_rl (PPO)",
+            "type": "debugpy",
+            "request": "launch",
+            "args" : ["--task", "Template-Roboverse-v0", "--num_envs", "4096", "--headless"],
+            "program": "${workspaceFolder}/scripts/rsl_rl/train.py",
+            "console": "integratedTerminal",
+        },
+        {
+            "name": "Python: Play Template-Roboverse-v0 with rsl_rl (PPO)",
+            "type": "debugpy",
+            "request": "launch",
+            "args" : ["--task", "Template-Roboverse-v0", "--num_envs", "32"],
+            "program": "${workspaceFolder}/scripts/rsl_rl/play.py",
+            "console": "integratedTerminal",
+        },
+        // For script execution inside a Docker
+        {
+            "name": "Docker: Current File",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "env": {
+                "PYTHONPATH": "${env:PYTHONPATH}:${workspaceFolder}"
+            }
+        },
+        {
+            "name": "Docker: Train Template-Roboverse-Direct-v0 with rsl_rl (PPO)",
+            "type": "debugpy",
+            "request": "launch",
+            "args" : ["--task", "Template-Roboverse-Direct-v0", "--num_envs", "4096", "--headless"],
+            "program": "${workspaceFolder}/scripts/rsl_rl/train.py",
+            "console": "integratedTerminal",
+            "env": {
+                "PYTHONPATH": "${env:PYTHONPATH}:${workspaceFolder}"
+            },
+        },
+        {
+            "name": "Docker: Play Template-Roboverse-Direct-v0 with rsl_rl (PPO)",
+            "type": "debugpy",
+            "request": "launch",
+            "args" : ["--task", "Template-Roboverse-Direct-v0", "--num_envs", "32"],
+            "program": "${workspaceFolder}/scripts/rsl_rl/play.py",
+            "console": "integratedTerminal",
+            "env": {
+                "PYTHONPATH": "${env:PYTHONPATH}:${workspaceFolder}"
+            },
+        },
+        {
+            "name": "Docker: Train Template-Roboverse-Marl-Direct-v0 with rsl_rl (PPO)",
+            "type": "debugpy",
+            "request": "launch",
+            "args" : ["--task", "Template-Roboverse-Marl-Direct-v0", "--num_envs", "4096", "--headless"],
+            "program": "${workspaceFolder}/scripts/rsl_rl/train.py",
+            "console": "integratedTerminal",
+            "env": {
+                "PYTHONPATH": "${env:PYTHONPATH}:${workspaceFolder}"
+            },
+        },
+        {
+            "name": "Docker: Play Template-Roboverse-Marl-Direct-v0 with rsl_rl (PPO)",
+            "type": "debugpy",
+            "request": "launch",
+            "args" : ["--task", "Template-Roboverse-Marl-Direct-v0", "--num_envs", "32"],
+            "program": "${workspaceFolder}/scripts/rsl_rl/play.py",
+            "console": "integratedTerminal",
+            "env": {
+                "PYTHONPATH": "${env:PYTHONPATH}:${workspaceFolder}"
+            },
+        },
+        {
+            "name": "Docker: Train Template-Roboverse-v0 with rsl_rl (PPO)",
+            "type": "debugpy",
+            "request": "launch",
+            "args" : ["--task", "Template-Roboverse-v0", "--num_envs", "4096", "--headless"],
+            "program": "${workspaceFolder}/scripts/rsl_rl/train.py",
+            "console": "integratedTerminal",
+            "env": {
+                "PYTHONPATH": "${env:PYTHONPATH}:${workspaceFolder}"
+            },
+        },
+        {
+            "name": "Docker: Play Template-Roboverse-v0 with rsl_rl (PPO)",
+            "type": "debugpy",
+            "request": "launch",
+            "args" : ["--task", "Template-Roboverse-v0", "--num_envs", "32"],
+            "program": "${workspaceFolder}/scripts/rsl_rl/play.py",
+            "console": "integratedTerminal",
+            "env": {
+                "PYTHONPATH": "${env:PYTHONPATH}:${workspaceFolder}"
+            },
+        },
+    ]
+}
