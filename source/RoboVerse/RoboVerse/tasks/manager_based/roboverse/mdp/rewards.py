@@ -8,7 +8,7 @@ from __future__ import annotations
 import torch
 from typing import TYPE_CHECKING
 
-from isaaclab.assets import Articulation
+from isaaclab.assets import Articulation, RigidObject
 from isaaclab.managers import SceneEntityCfg
 from isaaclab.utils.math import wrap_to_pi
 
@@ -24,3 +24,15 @@ def joint_pos_target_l2(env: ManagerBasedRLEnv, target: float, asset_cfg: SceneE
     joint_pos = wrap_to_pi(asset.data.joint_pos[:, asset_cfg.joint_ids])
     # compute the reward
     return torch.sum(torch.square(joint_pos - target), dim=1)
+
+def flat_orientation_l2(env: ManagerBasedRLEnv, asset_cfg: SceneEntityCfg = SceneEntityCfg("robot")) -> torch.Tensor:
+    """Penalize non-flat base orientation using L2 squared kernel.
+
+    This is computed as the squared distance of the projected gravity vector from the ideal [0, 0, -1].
+    Unlike penalizing only xy-components, this also distinguishes upright from upside-down.
+    """
+    # extract the used quantities (to enable type-hinting)
+    asset: RigidObject = env.scene[asset_cfg.name]
+    # ideal gravity in body frame when upright: [0, 0, -1]
+    target = torch.tensor([0.0, 0.0, -1.0], device=asset.data.projected_gravity_b.device)
+    return torch.sum(torch.square(asset.data.projected_gravity_b - target), dim=1)

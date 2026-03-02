@@ -87,7 +87,7 @@ from rsl_rl.runners import DistillationRunner, OnPolicyRunner
 # Monkeypatch torch.normal to ensure std is always positive (avoid RuntimeError: std < 0)
 # This is a minimal, local safeguard so site-packages don't need editing.
 _torchnormal_orig = torch.normal
-def _torchnormal_clamped(mean, std=None, size=None, out=None):
+def _torchnormal_clamped(mean, std=None, *args, **kwargs):
     try:
         if std is not None:
             if isinstance(std, torch.Tensor):
@@ -97,7 +97,9 @@ def _torchnormal_clamped(mean, std=None, size=None, out=None):
     except Exception:
         # fallback: if something unexpected, keep original std
         pass
-    return _torchnormal_orig(mean=mean, std=std, size=size, out=out)
+    if std is not None:
+        return _torchnormal_orig(mean, std, *args, **kwargs)
+    return _torchnormal_orig(mean, *args, **kwargs)
 torch.normal = _torchnormal_clamped
 
 from isaaclab.envs import (
