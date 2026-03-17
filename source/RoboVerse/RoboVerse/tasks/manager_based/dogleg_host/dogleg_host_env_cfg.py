@@ -159,10 +159,10 @@ class EventCfg:
         params={
             "asset_cfg": SceneEntityCfg("robot"),  # No joint_names needed for root state
             "pose_range": {
-                "x": (-0.5, 0.5),       # Randomize x position (meters)
-                "y": (-0.5, 0.5),       # Randomize y position (meters)
+                "x": (-5.0, 5.0),       # Randomize x position (meters)
+                "y": (-5.0, 5.0),       # Randomize y position (meters)
                 "z": (0.05, 0.05),     # Uncomment and set to fixed height or small range if needed
-                "roll": (-3.1416, 3.1416), # Small randomization (radians); omit for no change
+                "roll": (-1.57, 1.57), # Small randomization (radians); omit for no change
                 "pitch": (-3.1416, 3.1416),
                 "yaw": (-3.1416, 3.1416),  # Full random yaw; omit or narrow for less rotation
             },
@@ -180,7 +180,6 @@ class EventCfg:
         },
     )
 
-
 @configclass
 class RewardsCfg:
     """Reward terms for the MDP."""
@@ -189,7 +188,7 @@ class RewardsCfg:
 
     terminating = RewTerm(func=mdp.is_terminated, weight=-2.0)
 
-    flat_orientation = RewTerm(
+    flat_orientation_l2 = RewTerm(
         func=mdp.flat_orientation_l2,
         weight=-5.0,
         params={
