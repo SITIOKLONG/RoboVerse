@@ -162,8 +162,8 @@ class EventCfg:
                 "x": (-5.0, 5.0),       # Randomize x position (meters)
                 "y": (-5.0, 5.0),       # Randomize y position (meters)
                 "z": (0.05, 0.05),     # Uncomment and set to fixed height or small range if needed
-                "roll": (-1.57, 1.57), # Small randomization (radians); omit for no change
-                "pitch": (-3.1416, 3.1416),
+                "roll": (-3.1416, 3.1416), # Small randomization (radians); omit for no change
+                "pitch": (1.57, 1.57),
                 "yaw": (-3.1416, 3.1416),  # Full random yaw; omit or narrow for less rotation
             },
             "velocity_range": {},  # Empty dict resets linear/angular velocities to zero (recommended for clean resets)
@@ -197,8 +197,25 @@ class RewardsCfg:
     )
 
     joint_vel = RewTerm(
-        func=mdp.joint_vel_l1,
+        func=mdp.joint_vel_l2,
         weight=-0.01,
+        params={
+            "asset_cfg": SceneEntityCfg("robot", joint_names=[".*"])
+        },
+    )
+
+    joint_vel_limit = RewTerm(
+        func=mdp.joint_vel_limits,
+        weight=-0.1,
+        params={
+            "soft_ratio": 0.9,
+            "asset_cfg": SceneEntityCfg("robot", joint_names=[".*"]),
+        },
+    )
+
+    joint_torque = RewTerm(
+        func=mdp.joint_torques_l2,
+        weight=-1e-4,
         params={
             "asset_cfg": SceneEntityCfg("robot", joint_names=[".*"])
         },
@@ -214,7 +231,7 @@ class RewardsCfg:
 
     ang_vel_xy = RewTerm(
         func=mdp.ang_vel_xy_l2,
-        weight=-0.01,
+        weight=-0.1,
         params={
             "asset_cfg": SceneEntityCfg("robot"),
         },
@@ -222,9 +239,19 @@ class RewardsCfg:
 
     body_lin_acc = RewTerm(
         func=mdp.body_lin_acc_l2,
-        weight=-0.0001,
+        weight=-0.001,
         params={
             "asset_cfg": SceneEntityCfg("robot"),
+        },
+    )
+
+    # encourage feet to contact the ground: penalize when no foot contacts are present
+    feet_contact = RewTerm(
+        func=mdp.desired_contacts,
+        weight=-1.0,
+        params={
+            "sensor_cfg": SceneEntityCfg("contact_forces", body_names=".*_feet.*"),
+            "threshold": 1.0,
         },
     )
 
@@ -266,11 +293,12 @@ class DoglegEnvCfg(ManagerBasedRLEnvCfg):
     # Post initialization
     def __post_init__(self) -> None:
         """Post initialization."""
+        self.sim.physx.gpu_max_rigid_patch_count = 4096 * 4096 * 10
         # general settings
         self.decimation = 2
         self.episode_length_s = 5
         # viewer settings
-        self.viewer.eye = (8.0, 0.0, 5.0)
+        self.viewer.eye = (8.0, 5.0, 2.0)
         # simulation settings
         self.sim.dt = 1 / 120
         self.sim.render_interval = self.decimation

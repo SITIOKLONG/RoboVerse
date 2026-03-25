@@ -48,7 +48,7 @@ DoglegCfg = ArticulationCfg(
                 ".*": 40.0,
             },
             saturation_effort=120.0,
-            velocity_limit=1000.0,   # TODO: need check for real velocity
+            velocity_limit=8.0,   # TODO: need check for real velocity
             damping={
                 ".*": 100.0,
             },
@@ -65,8 +65,8 @@ DoglegCfg = ArticulationCfg(
             effort_limit={
                 ".*": 40.0,
             },
-            saturation_effort=120.0,
-            velocity_limit=100.0,
+            saturation_effort=80.0,
+            velocity_limit=6.0,
             damping={
                 ".*": 2.0,
             },
@@ -84,7 +84,7 @@ DoglegCfg = ArticulationCfg(
                 ".*": 9.0,
             },
             saturation_effort=27.0,
-            velocity_limit=100.0,
+            velocity_limit=2.0,
             damping={
                 ".*": 0.1,
             },
@@ -101,8 +101,8 @@ DoglegCfg = ArticulationCfg(
             effort_limit={
                 ".*": 20.0,
             },
-            saturation_effort=60.0,
-            velocity_limit=100.0,
+            saturation_effort=20.0,
+            velocity_limit=10.0,
             damping={
                 ".*": 0.5,
             },
@@ -119,8 +119,8 @@ DoglegCfg = ArticulationCfg(
             effort_limit={
                 ".*": 9.0,
             },
-            saturation_effort=27.0,
-            velocity_limit=100.0,
+            saturation_effort=9.0,
+            velocity_limit=10.0,
             damping={
                 ".*": 0.5,
             },

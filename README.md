@@ -1,16 +1,27 @@
-# Template for Isaac Lab Projects
+# RoboVerse
+IsaacLab repo for RoboMaster
 
-## Overview
+contributer:
+sjy (MECH), jyc, jason ming
 
-This project/repository serves as a template for building projects or extensions based on Isaac Lab.
-It allows you to develop in an isolated environment, outside of the core Isaac Lab repository.
+## Tasks
+- Dogleg-Host-v0
 
-**Key Features:**
+![Dogleg-Host-v0](assets/Dogleg-Host-v0.gif)
 
-- `Isolation` Work outside the core Isaac Lab repository, ensuring that your development efforts remain self-contained.
-- `Flexibility` This template is set up to allow your code to be run as an extension in Omniverse.
+...others ongoing
 
-**Keywords:** extension, template, isaaclab
+## How to run
+train:
+```bash
+python scripts/rsl_rl/train.py --task=Dogleg-Host-v0 --headless
+```
+
+replay and export to jit:
+```bash
+python scripts/rsl_rl/play.py --task=Dogleg-Host-v0 --checkpoint=<your_checkpoint_pt_file> --headless --video
+```
+
 
 ## Installation
 
@@ -133,3 +144,6 @@ Some examples of packages that can likely be excluded are:
 "<path-to-isaac-sim>/extscache/omni.services.*"     // Services tools
 ...
 ```
+
+# contact
+wechat: `dd65621761`
