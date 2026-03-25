@@ -162,8 +162,8 @@ class EventCfg:
                 "x": (-5.0, 5.0),       # Randomize x position (meters)
                 "y": (-5.0, 5.0),       # Randomize y position (meters)
                 "z": (0.05, 0.05),     # Uncomment and set to fixed height or small range if needed
-                "roll": (-3.1416, 3.1416), # Small randomization (radians); omit for no change
-                "pitch": (1.57, 1.57),
+                "roll": (-1.57, 1.57), # Small randomization (radians); omit for no change
+                "pitch": (3.1416, 3.1416),
                 "yaw": (-3.1416, 3.1416),  # Full random yaw; omit or narrow for less rotation
             },
             "velocity_range": {},  # Empty dict resets linear/angular velocities to zero (recommended for clean resets)
